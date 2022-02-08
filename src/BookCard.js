@@ -2,19 +2,7 @@ import React , {Component  } from "react"
 import {getAllBooks } from "./Api"
 import "./App.css";
 
-// calculateShelf = (book, books) => {
-//     let currentShelf = 'none';
 
-//     for (let item of books ) {
-//       if (item.id === book.id)  {
-//         currentShelf = item.shelf;
-//         break;
-//       }
-//     }
-//     return currentShelf;
-//   }
-
-//defaultValue={this.calculateShelf(book, books)}
 export default function BookCard (props){
     const {book ,onChangeHandler} = props;
          return (

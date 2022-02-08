@@ -16,14 +16,13 @@ export default class HomePage extends Component {
         this.setState({ books: data });
       });
     }
+    
   }
 
   onChangeHandler = (e, book) => {
     updateBook(book.id, e.target.value);
-
-    var updatedBooks = this.state.books.filter(
-      (resultBook) => resultBook.id !== book.id
-    );
+    book.shelf = e.target.value;//????
+    var updatedBooks = this.state.books.filter( (resultBook) => resultBook.id !== book.id);
     updatedBooks.push(book);
     //  Updated Books array
     this.setState({ books: updatedBooks });
