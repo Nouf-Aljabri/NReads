@@ -17,9 +17,9 @@ export default class HomePage extends Component {
         this.setState({ books: data });
       });
     }
-    
   }
 
+  // update shelf
   onChangeHandler = (e, id) => {
     updateBook(id, e.target.value);
     getAllBooks().then((updatedBooks) => {
@@ -28,7 +28,6 @@ export default class HomePage extends Component {
   };
 
   render() {
-    console.log(this.state.books);
     const bookshelves = [
       { state: "currentlyReading", title: "Currently Reading" },
       { state: "wantToRead", title: "Want to Read" },
@@ -41,7 +40,9 @@ export default class HomePage extends Component {
             <h1>NReads</h1>
           </div>
           <div className="books-list_content">
-            {bookshelves.map((shelf, index) => {
+            { 
+            // display the list of shelves 
+            bookshelves.map((shelf, index) => {
               const booksOfEachShelf = this.state.books.filter(
                 (book) => book.shelf === shelf.state
               );
@@ -59,9 +60,8 @@ export default class HomePage extends Component {
           </div>
           <div className="search-btn">
             <Link to="/SearchPage">
-            <button>Add a book</button>
+              <button>Add a book</button>
             </Link>
-           
           </div>
         </div>
       </div>
