@@ -20,7 +20,7 @@ export default function BookCard (props){
                 ></div>
                 <div className="shelf-shfiter">
                   <select value={book.shelf} onChange={(e)=>{
-                     onChangeHandler(e,book);
+                     onChangeHandler(e,book.id);
                   }} >
                     <option value="move" disabled> Move to...
                     </option>

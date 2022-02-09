@@ -1,4 +1,5 @@
-import React, { Component, useEffect } from "react";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { getAllBooks, updateBook } from "./Api";
 import "./App.css";
 import BookList from "./BookList";
@@ -19,15 +20,15 @@ export default class HomePage extends Component {
     
   }
 
-  onChangeHandler = (e, book) => {
-    updateBook(book.id, e.target.value);
-    var updatedBooks = this.state.books.filter( (resultBook) => resultBook.id !== book.id);
-    updatedBooks.push(book);
-    //  Updated Books array
-    this.setState({ books: updatedBooks });
+  onChangeHandler = (e, id) => {
+    updateBook(id, e.target.value);
+    getAllBooks().then((updatedBooks) => {
+      this.setState({ books: updatedBooks });
+    });
   };
 
   render() {
+    console.log(this.state.books);
     const bookshelves = [
       { state: "currentlyReading", title: "Currently Reading" },
       { state: "wantToRead", title: "Want to Read" },
@@ -57,7 +58,10 @@ export default class HomePage extends Component {
             })}
           </div>
           <div className="search-btn">
+            <Link to="/SearchPage">
             <button>Add a book</button>
+            </Link>
+           
           </div>
         </div>
       </div>
