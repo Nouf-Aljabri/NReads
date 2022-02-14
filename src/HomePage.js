@@ -1,33 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { getAllBooks, updateBook } from "./Api";
 import "./App.css";
 import BookList from "./BookList";
 
-export default class HomePage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { books: [] };
-    //this.onChangeHandler = this.onChangeHandler.bind(this);
-  }
-
-  componentDidMount() {
-    {
-      getAllBooks().then((data) => {
-        this.setState({ books: data });
-      });
-    }
-  }
-
-  // update shelf
-  onChangeHandler = (e, id) => {
-    updateBook(id, e.target.value);
-    getAllBooks().then((updatedBooks) => {
-      this.setState({ books: updatedBooks });
-    });
-  };
-
-  render() {
+export default function HomePage(props){
+ const {books , changeShelf} = props;
+   
     const bookshelves = [
       { state: "currentlyReading", title: "Currently Reading" },
       { state: "wantToRead", title: "Want to Read" },
@@ -43,7 +21,7 @@ export default class HomePage extends Component {
             { 
             // display the list of shelves 
             bookshelves.map((shelf, index) => {
-              const booksOfEachShelf = this.state.books.filter(
+              const booksOfEachShelf = books.filter(
                 (book) => book.shelf === shelf.state
               );
               return (
@@ -52,7 +30,7 @@ export default class HomePage extends Component {
                   <BookList
                     key={index}
                     books={booksOfEachShelf}
-                    onChangeHandler={this.onChangeHandler}
+                    changeShelf={changeShelf}
                   />
                 </div>
               );
@@ -66,5 +44,5 @@ export default class HomePage extends Component {
         </div>
       </div>
     );
-  }
+  
 }

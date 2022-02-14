@@ -3,18 +3,7 @@ import "./App.css";
 import bookCover from "./icons/bookcover.png";
 
 export default function BookCard(props) {
-  const { book, onChangeHandler } = props;
-  var author = "";
-  var img = bookCover;
-  // default auther
-  if (book.hasOwnProperty("authors")) {
-    author = book.authors[0];
-  }
-  // default book cover
-  if (book.hasOwnProperty("imageLinks")) {
-    img = book.imageLinks.thumbnail;
-  }
-
+  const { book, changeShelf } = props;
 
   return (
     <li>
@@ -25,14 +14,14 @@ export default function BookCard(props) {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url(${img})`,
+              backgroundImage: `url(${book.imageLinks? book.imageLinks.thumbnail: bookCover})`,
             }}
           ></div>
           <div className="shelf-shfiter">
             <select
               value={book.shelf}
               onChange={(e) => {
-                onChangeHandler(e, book.id);
+                changeShelf(e.target.value, book);
               }}
             >
               <option value="move" disabled>
@@ -47,7 +36,7 @@ export default function BookCard(props) {
           </div>
         </div>
         <div className="book-title">{book.title}</div>
-        <div className="book-author"> {author}</div>
+        <div className="book-author"> { book.authors?  book.authors[0] : " No Author"}</div>
       </div>
     </li>
   );

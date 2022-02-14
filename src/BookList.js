@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import BookCard from "./BookCard";
 
 export default function BookList(props) {
-  const { books, onChangeHandler } = props;
+  const { books, changeShelf } = props;
 
   return (
     <div className="shelf-books">
@@ -14,7 +14,7 @@ export default function BookList(props) {
             <BookCard
               key={book.id}
               book={book}
-              onChangeHandler={onChangeHandler}
+              changeShelf={changeShelf}
             />
           );
         })}
